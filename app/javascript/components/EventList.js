@@ -21,8 +21,8 @@ const EventList = ({ events }) => {
       return (
         <section className="eventList">
           <h2>
-            Events
-            <Link to="/events/new">New Event</Link>
+            Properties
+            <Link to="/events/new">Add Property</Link>
           </h2>
           <ul>{renderEvents(events)}</ul>
         </section>

@@ -15,22 +15,22 @@ const Event = ({ events }) => {
       </h2>
       <ul>
         <li>
-          <strong>Type:</strong> {event.event_type}
+          <strong>Location:</strong> {event.event_type}
         </li>
         <li>
-          <strong>Date:</strong> {event.event_date}
+          <strong>Price:</strong> {event.event_date}
         </li>
         <li>
-          <strong>Title:</strong> {event.title}
+          <strong>Price:</strong> {event.title}
         </li>
         <li>
-          <strong>Speaker:</strong> {event.speaker}
+          <strong>Owner:</strong> {event.speaker}
         </li>
         <li>
-          <strong>Host:</strong> {event.host}
+          <strong>Contact:</strong> {event.host}
         </li>
         <li>
-          <strong>Published:</strong> {event.published ? 'yes' : 'no'}
+          <strong>Available:</strong> {event.published ? 'yes' : 'no'}
         </li>
       </ul>
     </div>

@@ -24,23 +24,23 @@ const EventForm = () => {
     const errors = {};
 
     if (event.event_type === '') {
-      errors.event_type = 'You must enter an event type';
+      errors.event_type = 'You must enter the property location';
     }
 
     if (event.event_date === '') {
-      errors.event_date = 'You must enter a valid date';
+      errors.event_date = 'You must enter the price';
     }
 
     if (event.title === '') {
-      errors.title = 'You must enter a title';
+      errors.title = 'You must enter property description';
     }
 
     if (event.speaker === '') {
-      errors.speaker = 'You must enter at least one speaker';
+      errors.speaker = 'You must enter at least one owner';
     }
 
     if (event.host === '') {
-      errors.host = 'You must enter at least one host';
+      errors.host = 'please enter the contacts of the owner';
     }
 
     return errors;
@@ -55,7 +55,7 @@ const EventForm = () => {
 
     return (
       <div className="errors">
-        <h3>The following errors prohibited the event from being saved:</h3>
+        <h3>The following errors prohibited the property from being saved:</h3>
         <ul>
           {Object.values(formErrors).map((formError) => (
             <li key={formError}>{formError}</li>
@@ -80,11 +80,11 @@ const EventForm = () => {
     <section>
       {renderErrors()}
 
-      <h2>New Event</h2>
+      <h2>New Property</h2>
       <form className="eventForm" onSubmit={handleSubmit}>
         <div>
           <label htmlFor="event_type">
-            <strong>Type:</strong>
+            <strong>Location:</strong>
             <input
               type="text"
               id="event_type"
@@ -95,7 +95,7 @@ const EventForm = () => {
         </div>
         <div>
           <label htmlFor="event_date">
-            <strong>Date:</strong>
+            <strong>Price:</strong>
             <input
               type="text"
               id="event_date"
@@ -106,7 +106,7 @@ const EventForm = () => {
         </div>
         <div>
           <label htmlFor="title">
-            <strong>Title:</strong>
+            <strong>Description:</strong>
             <textarea
               cols="30"
               rows="10"
@@ -118,7 +118,7 @@ const EventForm = () => {
         </div>
         <div>
           <label htmlFor="speaker">
-            <strong>Speakers:</strong>
+            <strong>Owner:</strong>
             <input
               type="text"
               id="speaker"
@@ -129,7 +129,7 @@ const EventForm = () => {
         </div>
         <div>
           <label htmlFor="host">
-            <strong>Hosts:</strong>
+            <strong>Contact:</strong>
             <input
               type="text"
               id="host"
@@ -140,7 +140,7 @@ const EventForm = () => {
         </div>
         <div>
           <label htmlFor="published">
-            <strong>Publish:</strong>
+            <strong>Available:</strong>
             <input
               type="checkbox"
               id="published"
