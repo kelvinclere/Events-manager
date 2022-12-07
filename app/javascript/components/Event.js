@@ -14,6 +14,9 @@ const Event = ({ events }) => {
         {event.event_type}
       </h2>
       <ul>
+      <li>
+          <strong>image:</strong> {event.images}
+        </li>
         <li>
           <strong>Location:</strong> {event.event_type}
         </li>
