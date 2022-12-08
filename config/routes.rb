@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  root to: redirect('/events')
+  devise_for :users
+  root to: "home#index"
 
   get 'events', to: 'site#index'
   get 'events/new', to: 'site#index'

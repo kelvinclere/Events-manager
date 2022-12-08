@@ -11,10 +11,11 @@ body, html, div, blockquote, img, label, p, h1, h2, h3, h4, h5, h6, pre, ul, ol,
     font-family: Roboto;
     font-size: 16px;
     line-height: 28px;
+    
   }
   
   header {
-    background: #f57011;
+    background: #54C7F9;
     height: 60px;
   }
   
@@ -42,7 +43,7 @@ body, html, div, blockquote, img, label, p, h1, h2, h3, h4, h5, h6, pre, ul, ol,
   }
   
   .eventList {
-    background: #f6f6f6;
+    background: #54C7F9;
     padding: 16px;
   }
   
@@ -61,7 +62,7 @@ body, html, div, blockquote, img, label, p, h1, h2, h3, h4, h5, h6, pre, ul, ol,
   }
   
   .eventList li:hover, a.active {
-    background: #f8e5ce;
+    background: white;
   }
   
   .eventList a {
@@ -73,7 +74,11 @@ body, html, div, blockquote, img, label, p, h1, h2, h3, h4, h5, h6, pre, ul, ol,
   }
   
   .eventList h2 > a {
-    color: #236fff;
+    color: white;
+    background-color: gray;
+    width: 100px;
+    text-align: center;
+    border-radius: 10px;
     font-size: 15px;
     float: right;
     font-weight: normal;
@@ -106,7 +111,7 @@ body, html, div, blockquote, img, label, p, h1, h2, h3, h4, h5, h6, pre, ul, ol,
   }
   
   button[type="submit"] {
-    background: #f57011;
+    background: #54C7F9;
     border: none;
     padding: 5px 25px 8px;
     font-weight: 500;
@@ -144,7 +149,7 @@ body, html, div, blockquote, img, label, p, h1, h2, h3, h4, h5, h6, pre, ul, ol,
     padding: 0 !important;
     margin-left: 10px;
     cursor: pointer;
-    color: #236fff;
+    color: red;
     font-size: 15px;
     font-weight: normal;
     text-decoration: none;
@@ -155,7 +160,7 @@ body, html, div, blockquote, img, label, p, h1, h2, h3, h4, h5, h6, pre, ul, ol,
   }
   
   h2 a {
-    color: #236fff;
+    color: blue;
     font-size: 15px;
     font-weight: normal;
     margin: 3px 12px 0 12px;
@@ -167,7 +172,7 @@ body, html, div, blockquote, img, label, p, h1, h2, h3, h4, h5, h6, pre, ul, ol,
   }
   
   .form-actions a {
-    color: #236fff;
+    color: red;
     font-size: 15px;
     margin: 3px 12px 0 12px;
     text-decoration: none;
