@@ -1,28 +1,38 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useCallback, useEffect, useState, useRef } from 'react';
+import { useParams, Link } from 'react-router-dom';
 import Pikaday from 'pikaday';
+import PropTypes from 'prop-types';
+import EventNotFound from './EventNotFound';
+import { formatDate, isEmptyObject, validateEvent } from '../helpers/helpers';
+
 import 'pikaday/css/pikaday.css';
-import { isEmptyObject, validateEvent } from '../helpers/helpers';
 
+const EventForm = ({ events, onSave }) => {
+  const { id } = useParams();
 
-const EventForm = () => {
-  const [event, setEvent] = useState({
-    images: '',
-    event_type: '',
-    event_date: '',
-    title: '',
-    speaker: '',
-    host: '',
-    published: false,
-  });
+  const initialEventState = useCallback(
+    () => {
+      const defaults = {
+        event_type: '',
+        event_date: '',
+        title: '',
+        speaker: '',
+        host: '',
+        published: false,
+      };
+      const currEvent = id ? events.find((e) => e.id === Number(id)) : {};
+      return { ...defaults, ...currEvent }
+    },
+    [events, id]
+  );
 
+  const [event, setEvent] = useState(initialEventState);
   const [formErrors, setFormErrors] = useState({});
   const dateInput = useRef(null);
 
-
   const updateEvent = (key, value) => {
     setEvent((prevEvent) => ({ ...prevEvent, [key]: value }));
-  }
-
+  };
 
   useEffect(() => {
     const p = new Pikaday({
@@ -40,52 +50,24 @@ const EventForm = () => {
     return () => p.destroy();
   }, []);
 
-
-
   const handleInputChange = (e) => {
     const { target } = e;
     const { name } = target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
 
-    setEvent({ ...event, [name]: value });
+    updateEvent(name, value);
   };
 
-  const validateEvent = () => {
-    const errors = {};
-
-    if (event.event_type === '') {
-      errors.event_type = 'You must enter the property location';
-    }
-
-    if (event.event_date === '') {
-      errors.event_date = 'You must enter the price';
-    }
-
-    if (event.title === '') {
-      errors.title = 'You must enter property description';
-    }
-
-    if (event.speaker === '') {
-      errors.speaker = 'You must enter at least one owner';
-    }
-
-    if (event.host === '') {
-      errors.host = 'please enter the contacts of the owner';
-    }
-
-    return errors;
-  };
-
-  const isEmptyObject = (obj) => Object.keys(obj).length === 0;
+  useEffect(() => {
+    setEvent(initialEventState);
+  }, [events, initialEventState]);
 
   const renderErrors = () => {
-    if (isEmptyObject(formErrors)) {
-      return null;
-    }
+    if (isEmptyObject(formErrors)) return null;
 
     return (
       <div className="errors">
-        <h3>The following errors prohibited the property from being saved:</h3>
+        <h3>The following errors prohibited the event from being saved:</h3>
         <ul>
           {Object.values(formErrors).map((formError) => (
             <li key={formError}>{formError}</li>
@@ -102,15 +84,20 @@ const EventForm = () => {
     if (!isEmptyObject(errors)) {
       setFormErrors(errors);
     } else {
-      console.log(event);
+      onSave(event);
     }
   };
 
+  const cancelURL = event.id ? `/events/${event.id}` : '/events';
+  const title = event.id ? `${event.event_date} - ${event.event_type}` : 'New Event';
+
+  if (id && !event.id) return <EventNotFound />;
+
   return (
-    <section>
+    <div>
+      <h2>{title}</h2>
       {renderErrors()}
 
-      <h2>New Event</h2>
       <form className="eventForm" onSubmit={handleSubmit}>
         <div>
           <label htmlFor="event_type">
@@ -120,21 +107,24 @@ const EventForm = () => {
               id="event_type"
               name="event_type"
               onChange={handleInputChange}
+              value={event.event_type}
             />
           </label>
         </div>
         <div>
-         <label htmlFor="event_date">
-         <strong>Date:</strong>
-         <input
-            type="text"
-            id="event_date"
-            name="event_date"
-            ref={dateInput}
-            autoComplete="off"
-         />
-       </label>
-      </div>
+          <label htmlFor="event_date">
+            <strong>Date:</strong>
+            <input
+              type="text"
+              id="event_date"
+              name="event_date"
+              ref={dateInput}
+              autoComplete="off"
+              value={event.event_date}
+              onChange={handleInputChange}
+            />
+          </label>
+        </div>
         <div>
           <label htmlFor="title">
             <strong>Title:</strong>
@@ -144,28 +134,31 @@ const EventForm = () => {
               id="title"
               name="title"
               onChange={handleInputChange}
+              value={event.title}
             />
           </label>
         </div>
         <div>
           <label htmlFor="speaker">
-            <strong>Speaker:</strong>
+            <strong>Speakers:</strong>
             <input
               type="text"
               id="speaker"
               name="speaker"
               onChange={handleInputChange}
+              value={event.speaker}
             />
           </label>
         </div>
         <div>
           <label htmlFor="host">
-            <strong>Host:</strong>
+            <strong>Hosts:</strong>
             <input
               type="text"
               id="host"
               name="host"
               onChange={handleInputChange}
+              value={event.host}
             />
           </label>
         </div>
@@ -177,15 +170,36 @@ const EventForm = () => {
               id="published"
               name="published"
               onChange={handleInputChange}
+              checked={event.published}
             />
           </label>
         </div>
         <div className="form-actions">
           <button type="submit">Save</button>
+          <Link to={cancelURL}>Cancel</Link>
         </div>
       </form>
-    </section>
+    </div>
   );
 };
 
 export default EventForm;
+
+EventForm.propTypes = {
+  events: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      event_type: PropTypes.string.isRequired,
+      event_date: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      speaker: PropTypes.string.isRequired,
+      host: PropTypes.string.isRequired,
+      published: PropTypes.bool.isRequired,
+    })
+  ),
+  onSave: PropTypes.func.isRequired,
+};
+
+EventForm.defaultProps = {
+  events: [],
+};

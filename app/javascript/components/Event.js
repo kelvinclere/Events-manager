@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
+import EventNotFound from './EventNotFound';
 
-const Event = ({ events }) => {
+const Event = ({ events, onDelete }) => {
   const { id } = useParams();
   const event = events.find((e) => e.id === Number(id));
+
+  if (!event) return <EventNotFound />;
 
   return (
     <div className="eventContainer">
@@ -12,9 +15,16 @@ const Event = ({ events }) => {
         {event.event_date}
         {' - '}
         {event.event_type}
+        <Link to={`/events/${event.id}/edit`}>Edit</Link>
+        <button
+          className="delete"
+          type="button"
+          onClick={() => onDelete(event.id)}
+        >
+          Delete
+        </button>
       </h2>
       <ul>
- 
         <li>
           <strong>Type:</strong> {event.event_type}
         </li>
@@ -25,13 +35,13 @@ const Event = ({ events }) => {
           <strong>Title:</strong> {event.title}
         </li>
         <li>
-          <strong>Speakers:</strong> {event.speaker}
+          <strong>Speaker:</strong> {event.speaker}
         </li>
         <li>
-          <strong>Hosts:</strong> {event.host}
+          <strong>Host:</strong> {event.host}
         </li>
         <li>
-          <strong>Publish:</strong> {event.published ? 'yes' : 'no'}
+          <strong>Published:</strong> {event.published ? 'yes' : 'no'}
         </li>
       </ul>
     </div>
@@ -50,6 +60,7 @@ Event.propTypes = {
       published: PropTypes.bool.isRequired,
     })
   ).isRequired,
+  onDelete: PropTypes.func.isRequired,
 };
 
 export default Event;
