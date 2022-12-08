@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import Pikaday from 'pikaday';
+import 'pikaday/css/pikaday.css';
 import { isEmptyObject, validateEvent } from '../helpers/helpers';
+
 
 const EventForm = () => {
   const [event, setEvent] = useState({
+    images: '',
     event_type: '',
     event_date: '',
     title: '',
@@ -12,6 +16,31 @@ const EventForm = () => {
   });
 
   const [formErrors, setFormErrors] = useState({});
+  const dateInput = useRef(null);
+
+
+  const updateEvent = (key, value) => {
+    setEvent((prevEvent) => ({ ...prevEvent, [key]: value }));
+  }
+
+
+  useEffect(() => {
+    const p = new Pikaday({
+      field: dateInput.current,
+      toString: date => formatDate(date),
+      onSelect: (date) => {
+        const formattedDate = formatDate(date);
+        dateInput.current.value = formattedDate;
+        updateEvent('event_date', formattedDate);
+      },
+    });
+
+    // Return a cleanup function.
+    // React will call this prior to unmounting.
+    return () => p.destroy();
+  }, []);
+
+
 
   const handleInputChange = (e) => {
     const { target } = e;
@@ -81,11 +110,11 @@ const EventForm = () => {
     <section>
       {renderErrors()}
 
-      <h2>New Property</h2>
+      <h2>New Event</h2>
       <form className="eventForm" onSubmit={handleSubmit}>
         <div>
           <label htmlFor="event_type">
-            <strong>Location:</strong>
+            <strong>Type:</strong>
             <input
               type="text"
               id="event_type"
@@ -95,19 +124,20 @@ const EventForm = () => {
           </label>
         </div>
         <div>
-          <label htmlFor="event_date">
-            <strong>Price:</strong>
-            <input
-              type="text"
-              id="event_date"
-              name="event_date"
-              onChange={handleInputChange}
-            />
-          </label>
-        </div>
+         <label htmlFor="event_date">
+         <strong>Date:</strong>
+         <input
+            type="text"
+            id="event_date"
+            name="event_date"
+            ref={dateInput}
+            autoComplete="off"
+         />
+       </label>
+      </div>
         <div>
           <label htmlFor="title">
-            <strong>Description:</strong>
+            <strong>Title:</strong>
             <textarea
               cols="30"
               rows="10"
@@ -119,7 +149,7 @@ const EventForm = () => {
         </div>
         <div>
           <label htmlFor="speaker">
-            <strong>Owner:</strong>
+            <strong>Speaker:</strong>
             <input
               type="text"
               id="speaker"
@@ -130,7 +160,7 @@ const EventForm = () => {
         </div>
         <div>
           <label htmlFor="host">
-            <strong>Contact:</strong>
+            <strong>Host:</strong>
             <input
               type="text"
               id="host"
@@ -141,7 +171,7 @@ const EventForm = () => {
         </div>
         <div>
           <label htmlFor="published">
-            <strong>Available:</strong>
+            <strong>Publish:</strong>
             <input
               type="checkbox"
               id="published"
