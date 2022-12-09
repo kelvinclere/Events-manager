@@ -15,4 +15,8 @@ By **{kelvin Muthomi}**
 * CSS - used to styling the pages
 * HTML - design
 
+## installation and Set up
+Clone the repository
+git@github.com:kelvinclere/Events-manager.git
+
 
