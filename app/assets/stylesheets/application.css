@@ -6,6 +6,8 @@ body, html, div, blockquote, img, label, p, h1, h2, h3, h4, h5, h6, pre, ul, ol,
   ul, ol {
     list-style: none;
   }
+
+
   
   body {
     font-family: Roboto;
@@ -165,6 +167,7 @@ body, html, div, blockquote, img, label, p, h1, h2, h3, h4, h5, h6, pre, ul, ol,
     font-weight: normal;
     margin: 3px 12px 0 12px;
     text-decoration: none;
+    
   }
   
   h2 a:hover {
