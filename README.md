@@ -15,17 +15,25 @@ By **{kelvin Muthomi}**
 * CSS - used to styling the pages
 * HTML - design
 
+## Known Bugs
+The website is still in development phase. However, potential clients can reach out to the developer in case of any issues with regards to any issue they face for further assistance
+
 ## installation and Set up
 Clone the repository
+
 **{git@github.com:kelvinclere/Events-manager.git}**
 
 install dependecies
+
 **{npm install}**
 
 Run
+
 **{npm start}**
 
-Copyright (c) {2022} **{Kelvin Muthomi}**
+Copyright (c) {2022} 
+
+**{Kelvin Muthomi}**
 
 
 
