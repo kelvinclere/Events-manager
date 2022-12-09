@@ -96,6 +96,7 @@ GEM
     erubi (1.11.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
+    hashie (5.0.0)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
     io-console (0.5.11)
@@ -131,12 +132,18 @@ GEM
     nio4r (2.5.8)
     nokogiri (1.13.9-x86_64-linux)
       racc (~> 1.4)
+    omniauth (2.1.0)
+      hashie (>= 3.4.6)
+      rack (>= 2.2.3)
+      rack-protection
     orm_adapter (0.5.0)
     public_suffix (5.0.0)
     puma (5.6.5)
       nio4r (~> 2.0)
     racc (1.6.1)
     rack (2.2.4)
+    rack-protection (3.0.4)
+      rack
     rack-proxy (0.7.4)
       rack
     rack-test (2.0.2)
@@ -228,6 +235,7 @@ DEPENDENCIES
   devise
   jbuilder
   net-http
+  omniauth
   puma (~> 5.0)
   rails (~> 7.0.4)
   selenium-webdriver
