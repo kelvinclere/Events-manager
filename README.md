@@ -21,19 +21,19 @@ The website is still in development phase. However, potential clients can reach 
 ## installation and Set up
 Clone the repository
 
-**{git@github.com:kelvinclere/Events-manager.git}**
+**git@github.com:kelvinclere/Events-manager.git**
 
 install dependecies
 
-**{npm install}**
+**npm install**
 
 Run
 
-**{npm start}**
+**npm start**
 
 Copyright (c) {2022} 
 
-**{Kelvin Muthomi}**
+**Kelvin Muthomi**
 
 
 
