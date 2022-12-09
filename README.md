@@ -17,6 +17,17 @@ By **{kelvin Muthomi}**
 
 ## installation and Set up
 Clone the repository
-git@github.com:kelvinclere/Events-manager.git
+**{git@github.com:kelvinclere/Events-manager.git}**
+
+install dependecies
+**{npm install}**
+
+Run
+**{npm start}**
+
+Copyright (c) {2022} **{Kelvin Muthomi}**
+
+
+
 
 
