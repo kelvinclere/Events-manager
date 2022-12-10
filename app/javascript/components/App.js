@@ -9,6 +9,7 @@ const App = () => (
     <Routes>
       <Route path="events/*" element={<Editor />} />
     </Routes>
+    <Events/>
     <ToastContainer />
   </>
 );
